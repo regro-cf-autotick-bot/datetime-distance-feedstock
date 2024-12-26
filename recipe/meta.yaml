@@ -7,21 +7,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/datetime-distance-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/datetime-distance-{{ version }}.tar.gz
   sha256: 7177a54a3555d4737626786f70a062e509f7c0014ba63fc26cd28263b8c64d68
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - future
-    - python >=3.6
+    - python >={{ python_min }}
     - python-dateutil >=2.6.0
 
 test:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/dedupeio/datetime-distance
